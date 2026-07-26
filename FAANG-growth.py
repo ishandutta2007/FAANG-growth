@@ -14,15 +14,23 @@ data = {
 }
 engineer_pct = {
     "Meta": 45,
-    "Amazon":3,
-    "Apple":41,
-    "Netflix"39:,
-    "Alphabet":44,
-    "Microsoft":44,
+    "Amazon": 3,
+    "Apple": 41,
+    "Netflix": 39,
+    "Alphabet": 44,
+    "Microsoft": 44,
 }
 
 df = pd.DataFrame(data)
 years = ["2019", "2020", "2021", "2022", "2023", "2024", "2025"]
+
+# Apply engineer percentage to the data
+for company in df["Company"]:
+    if company in engineer_pct:
+        df.loc[df["Company"] == company, years] = df.loc[df["Company"] == company, years] * (engineer_pct[company] / 100.0)
+
+# Convert back to integers
+df[years] = df[years].astype(int)
 
 # 2. Configure the plot canvas
 plt.figure(figsize=(11, 6))
@@ -48,9 +56,9 @@ for idx, row in df.iterrows():
     )
 
 # 4. Formatter enhancements for readability
-plt.title("FAANG Historical Headcount Trends (2019 - 2025)", fontsize=14, pad=15)
+plt.title("FAANG Historical Engineer Headcount Trends (2019 - 2025)", fontsize=14, pad=15)
 plt.xlabel("Fiscal Year", fontsize=11, labelpad=10)
-plt.ylabel("Total Global Employees", fontsize=11, labelpad=10)
+plt.ylabel("Total Global Engineers", fontsize=11, labelpad=10)
 
 # Formats large numbers on the Y-axis with commas (e.g., 1,500,000)
 plt.gca().get_yaxis().set_major_formatter(
@@ -74,9 +82,9 @@ df_growth = df.set_index('Company')[years].diff(axis=1).dropna(axis=1)
 # Plotting using pandas wrapper around matplotlib
 df_growth.T.plot(kind='bar', figsize=(11, 6), color=[colors[c] for c in df_growth.index], width=0.7, ax=plt.gca())
 
-plt.title("FAANG Year-over-Year Headcount Growth (2020 - 2025)", fontsize=14, pad=15)
+plt.title("FAANG Year-over-Year Engineer Growth (2020 - 2025)", fontsize=14, pad=15)
 plt.xlabel("Fiscal Year", fontsize=11, labelpad=10)
-plt.ylabel("Net Headcount Change", fontsize=11, labelpad=10)
+plt.ylabel("Net Engineer Change", fontsize=11, labelpad=10)
 plt.xticks(rotation=0)
 
 # Formats numbers with commas
