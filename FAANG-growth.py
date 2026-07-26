@@ -43,16 +43,24 @@ colors = {
 }
 
 # 3. Plot a trendline for each company
+n_years = len(years) - 1
 for idx, row in df.iterrows():
     company = row["Company"]
     counts = [row[y] for y in years]
+    
+    # Calculate CAGR
+    start_value = counts[0]
+    end_value = counts[-1]
+    cagr = ((end_value / start_value) ** (1 / n_years)) - 1
+    label_with_cagr = f"{company} (CAGR: {cagr*100:.1f}%)"
+    
     plt.plot(
         years,
         counts,
         marker="o",
         linewidth=2.5,
         color=colors[company],
-        label=company,
+        label=label_with_cagr,
     )
 
 # 4. Formatter enhancements for readability
