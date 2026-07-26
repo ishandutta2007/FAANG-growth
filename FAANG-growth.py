@@ -63,6 +63,24 @@ for idx, row in df.iterrows():
         color=colors[company],
         label=label_with_cagr,
     )
+    
+    # Annotate each point for the company
+    for i, count in enumerate(counts):
+        plt.annotate(f"{count:,}", (years[i], count), textcoords="offset points", xytext=(0, 6), ha='center', fontsize=8, color=colors[company])
+
+# Calculate and plot the total of all companies for each year
+totals = df[years].sum()
+plt.plot(
+    years, 
+    totals, 
+    marker="D", 
+    linewidth=3, 
+    color="black", 
+    linestyle="--",
+    label="Total (All Companies)"
+)
+for i, total_val in enumerate(totals):
+    plt.annotate(f"{total_val:,}", (years[i], total_val), textcoords="offset points", xytext=(0, 8), ha='center', fontsize=9, fontweight='bold')
 
 # 4. Formatter enhancements for readability
 plt.title("FAANG Historical Engineer Headcount Trends (2019 - 2025)", fontsize=14, pad=15)
@@ -75,7 +93,7 @@ plt.gca().get_yaxis().set_major_formatter(
 )
 
 # Optional: Uncomment the next line if you want to inspect growth curves clearly without Amazon skewing the axis
-# plt.yscale('log')
+plt.yscale('log')
 
 plt.grid(True, linestyle="--", alpha=0.5)
 plt.legend(title="Companies", frameon=True, facecolor="white")
