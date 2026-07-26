@@ -1,5 +1,9 @@
 # FAANG-growth
 
+<p align="center">
+  <img src="assets/banner.svg" width="100%" alt="FAANG Growth Banner">
+</p>
+
 This repository analyzes the historical headcount trends for top tech companies (FAANG + Microsoft) between 2019 and 2025. Specifically, it subsets the data to estimate and visualize the number of software engineers at each company.
 
 ## Features & Calculations
