@@ -12,6 +12,14 @@ data = {
     "2024": [74067, 1556000, 164000, 14000, 183323],
     "2025": [78865, 1576000, 166000, 16000, 190820],
 }
+engineer_pct = {
+    "Meta": 45,
+    "Amazon":3,
+    "Apple":41,
+    "Netflix"39:,
+    "Alphabet":44,
+    "Microsoft":44,
+}
 
 df = pd.DataFrame(data)
 years = ["2019", "2020", "2021", "2022", "2023", "2024", "2025"]
@@ -58,4 +66,27 @@ plt.tight_layout()
 
 # 5. Display the graph
 plt.savefig("assets/FAANG_growth.png")
+
+# 6. Calculate and plot year-over-year growth
+plt.figure(figsize=(11, 6))
+df_growth = df.set_index('Company')[years].diff(axis=1).dropna(axis=1)
+
+# Plotting using pandas wrapper around matplotlib
+df_growth.T.plot(kind='bar', figsize=(11, 6), color=[colors[c] for c in df_growth.index], width=0.7, ax=plt.gca())
+
+plt.title("FAANG Year-over-Year Headcount Growth (2020 - 2025)", fontsize=14, pad=15)
+plt.xlabel("Fiscal Year", fontsize=11, labelpad=10)
+plt.ylabel("Net Headcount Change", fontsize=11, labelpad=10)
+plt.xticks(rotation=0)
+
+# Formats numbers with commas
+plt.gca().get_yaxis().set_major_formatter(
+    plt.FuncFormatter(lambda x, p: format(int(x), ","))
+)
+
+plt.grid(True, linestyle="--", alpha=0.5, axis='y')
+plt.legend(title="Companies", frameon=True, facecolor="white")
+plt.tight_layout()
+plt.savefig("assets/FAANG_yoy_growth.png")
+
 plt.show()
