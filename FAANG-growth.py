@@ -1,0 +1,61 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 1. Establish the historical headcount dataset
+data = {
+    "Company": ["Meta", "Amazon", "Apple", "Netflix", "Alphabet"],
+    "2019": [44942, 798000, 137000, 8600, 118899],
+    "2020": [58604, 1298000, 147000, 9400, 135301],
+    "2021": [71970, 1608000, 154000, 11300, 156500],
+    "2022": [86482, 1541000, 164000, 12800, 190234],
+    "2023": [67317, 1525000, 161000, 13000, 182502],
+    "2024": [74067, 1556000, 164000, 14000, 183323],
+    "2025": [78865, 1576000, 166000, 16000, 190820],
+}
+
+df = pd.DataFrame(data)
+years = ["2019", "2020", "2021", "2022", "2023", "2024", "2025"]
+
+# 2. Configure the plot canvas
+plt.figure(figsize=(11, 6))
+colors = {
+    "Meta": "#1877F2",
+    "Amazon": "#FF9900",
+    "Apple": "#555555",
+    "Netflix": "#E50914",
+    "Alphabet": "#34A853",
+}
+
+# 3. Plot a trendline for each company
+for idx, row in df.iterrows():
+    company = row["Company"]
+    counts = [row[y] for y in years]
+    plt.plot(
+        years,
+        counts,
+        marker="o",
+        linewidth=2.5,
+        color=colors[company],
+        label=company,
+    )
+
+# 4. Formatter enhancements for readability
+plt.title("FAANG Historical Headcount Trends (2019 - 2025)", fontsize=14, pad=15)
+plt.xlabel("Fiscal Year", fontsize=11, labelpad=10)
+plt.ylabel("Total Global Employees", fontsize=11, labelpad=10)
+
+# Formats large numbers on the Y-axis with commas (e.g., 1,500,000)
+plt.gca().get_yaxis().set_major_formatter(
+    plt.FuncFormatter(lambda x, p: format(int(x), ","))
+)
+
+# Optional: Uncomment the next line if you want to inspect growth curves clearly without Amazon skewing the axis
+# plt.yscale('log')
+
+plt.grid(True, linestyle="--", alpha=0.5)
+plt.legend(title="Companies", frameon=True, facecolor="white")
+plt.tight_layout()
+
+# 5. Display the graph
+plt.savefig("assets/FAANG_growth.png")
+plt.show()
