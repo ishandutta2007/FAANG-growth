@@ -33,6 +33,13 @@ Simply run the Python script to execute the calculations, view the interactive p
 python FAANG-growth.py
 ```
 
+## See Also
+
+- [DOGMA-growth](https://github.com/ishandutta2007/DOGMA-growth)
+- [BATMAN-growth](https://github.com/ishandutta2007/BATMAN-growth)
+
+
+
 ## ⭐️ Star History
 <div align="center">
 <a href="https://www.star-history.com/?repos=ishandutta2007%2FFAANG-growth&type=date&legend=bottom-right">
