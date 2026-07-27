@@ -7,6 +7,20 @@
   <img src="assets/banner.svg" width="100%" alt="FAANG Growth Banner">
 </p>
 
+- F - Facebook
+- A - Apple
+- A - Amazon
+- N - Netflix
+- G - Google
+
+or 
+
+- M - Meta(Facebook)
+- A - Apple
+- A - Amazon
+- M - Microsoft
+- A - Alphabet(Google)
+
 This repository analyzes the historical headcount trends for top tech companies (FAANG + Microsoft) between 2019 and 2025. Specifically, it subsets the data to estimate and visualize the number of software engineers at each company.
 
 ## ✨ Features & Calculations 📊
